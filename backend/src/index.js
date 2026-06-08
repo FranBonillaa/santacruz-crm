@@ -9,6 +9,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const clients = require('./routes/clients');
 const collaborations = require('./routes/collaborations');
+const authMiddleware = require('./middleware/auth');
 
 //Creacion aplicación Express
 const app = express();
@@ -29,7 +30,6 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 
 //Rutas privadas
-const authMiddleware = require('./middleware/auth');
 app.use('/api/clients', authMiddleware, clients);
 app.use('/api/collaborations', authMiddleware, collaborations);
 
