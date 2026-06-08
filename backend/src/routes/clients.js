@@ -26,3 +26,18 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
+
+router.put('/:id', async (req, res) => {
+    const { date, name, contact, modality, status, responsible, source, amount } = req.body;
+
+    try {
+        await db.query(
+            'UPDATE client SET date=?, name=?, contact=?, modality=?, status=?, responsible=?, source=?, amount=? WHERE id=?',
+            [date, name, contact, modality, status, responsible, source, amount, req.params.id]
+        );
+        res.json({ message: 'Cliente actualizado' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error del servidor' });
+    }
+});

@@ -26,3 +26,18 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
+
+router.put('/:id', async (req, res) => {
+    const { brand_name, category, contact, status, responsible, notes } = req.body;
+
+    try {
+        await db.query(
+            'UPDATE collaboration SET brand_name=?, category=?, contact=?, status=?, responsible=?, notes=? WHERE id=?',
+            [brand_name, category, contact, status, responsible, notes, req.params.id]
+        );
+        res.json({ message: 'Colaboración actualizada' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error del servidor' });
+    }
+});
