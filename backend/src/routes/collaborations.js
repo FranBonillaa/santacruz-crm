@@ -41,3 +41,15 @@ router.put('/:id', async (req, res) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
+
+router.delete('/:id', async (req, res) => {
+    try {
+        await db.query('DELETE FROM collaboration WHERE id=?', [req.params.id]);
+        res.json({ message: 'Colaboración eliminada' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error del servidor' });
+    }
+});
+
+module.exports = router;
