@@ -1,25 +1,25 @@
 //Cargamos las variables del .env
-require('dotenv').config()
+require('dotenv').config();
 
 //Importar librerias
-const express = require('express')
-const cors = require('cors')
+const express = require('express');
+const cors = require('cors');
 
 //Creacion aplicación Express
-const app = express()
+const app = express();
 const PORT = process.env.PORT || 4000
 
 //Solo acepta peticiones del frontend
-app.use(cors({ origin: process.env.FRONTEND_URL }))
+app.use(cors({ origin: process.env.FRONTEND_URL }));
 
 //Solo lectura de JSON en peticiones
-app.use(express.json())
+app.use(express.json());
 
 //Confirma que el servidor funciona
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok' })
-})
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
-})
+});
