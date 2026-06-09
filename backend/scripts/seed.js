@@ -1,6 +1,6 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
-const db = require('./config/db');
+const db = require('../src/config/db');
 
 async function seed() {
     const name = 'Admin';
