@@ -1,0 +1,18 @@
+import axios from 'axios';
+import { config } from '../../../backend/src/config/db';
+
+const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000/api'
+});
+
+// Se ejecuta automaticamente antes de cada petición al backend
+// Lee el token y si existe lo añade al header
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token')
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
+    return config;
+});
+
+export default api
