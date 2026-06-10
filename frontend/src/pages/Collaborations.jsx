@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
-import api from '../services/api'
+import { useEffect, useState } from 'react';
+import api from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 function Collaborations() {
     const [collaborations, setCollaborations] = useState([])
+    const navigate = useNavigate();
 
     useEffect(() => {
         api.get('/collaborations').then(({ data }) => setCollaborations(data))
@@ -10,7 +12,13 @@ function Collaborations() {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-6">Colaboraciones</h1>
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-2xl font-bold mb-6">Colaboraciones</h1>
+                <button onClick={() => navigate('/collaborations/new')} className="bg-black text-white px-4 py-2 rounded text-sm hover:bg-gray-800">
+                    + Nueva Colaboración
+                </button>
+            </div>
+
             <table className="w-full bg-white rounded-lg shadow text-sm">
                 <thead className="bg-black text-white">
                     <tr>

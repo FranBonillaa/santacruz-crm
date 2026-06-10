@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import api from '../services/api'
+import { useNavigate } from 'react-router-dom'
 
 function Clients() {
     const [clients, setClients] = useState([])
+    const navigate = useNavigate();
 
     useEffect(() => {
         api.get('/clients').then(({ data }) => setClients(data))
@@ -10,7 +12,12 @@ function Clients() {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-6">Clientes</h1>
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-2xl font-bold mb-6">Clientes</h1>
+                <button onClick={() => navigate('/clients/new')} className="bg-black text-white px-4 py-2 rounded text-sm hover:bg-gray-800">
+                    + Nuevo Cliente
+                </button>
+            </div >
             <table className="w-full bg-white rounded-lg shadow text-sm">
                 <thead className="bg-black text-white">
                     <tr>
@@ -35,7 +42,7 @@ function Clients() {
                     ))}
                 </tbody>
             </table>
-        </div>
+        </div >
     )
 }
 
