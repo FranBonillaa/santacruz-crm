@@ -36,3 +36,4 @@ app.use('/api/collaborations', authMiddleware, collaborations);
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 });
+
