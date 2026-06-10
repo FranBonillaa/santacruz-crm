@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Layout from './components/Layout';
 import Clients from './pages/Clients';
+import Collaborations from './pages/Collaborations';
+
 
 
 function App() {
@@ -12,7 +14,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path='/' element={<div>Dashboard</div>} />
           <Route path='/clients' element={<Clients />} />
-          <Route path='/collaborations' element={<div>Colaboraciones</div>} />
+          <Route path='/collaborations' element={<Collaborations />} />
         </Route>
       </Routes>
     </BrowserRouter >
