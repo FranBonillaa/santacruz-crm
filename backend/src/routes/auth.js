@@ -12,7 +12,7 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    const [rows] = await db.query('SELECT * FROM user WHERE email = ?', [email]);
+    const { rows } = await db.query('SELECT * FROM "user" WHERE email = $1', [email]);
 
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Credenciales incorrectas' });

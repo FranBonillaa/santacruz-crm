@@ -1,7 +1,7 @@
 //Importar librerias
-const mysql2 = require('mysql2');
+const { Pool } = require('pg');
 
-const pool = mysql2.createPool({
+const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
@@ -10,4 +10,5 @@ const pool = mysql2.createPool({
     ssl: { rejectUnauthorized: false }
 });
 
-module.exports = pool.promise();
+module.exports = pool;
+
