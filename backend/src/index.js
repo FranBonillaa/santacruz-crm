@@ -15,8 +15,9 @@ const authMiddleware = require('./middleware/auth');
 const app = express();
 const PORT = process.env.PORT || 4000
 
-//Solo acepta peticiones del frontend
-app.use(cors({ origin: process.env.FRONTEND_URL }));
+//Solo acepta peticiones del frontend (Vercel + localhost en desarrollo)
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173'].filter(Boolean);
+app.use(cors({ origin: allowedOrigins }));
 
 //Solo lectura de JSON en peticiones
 app.use(express.json());
