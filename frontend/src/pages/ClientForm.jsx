@@ -7,6 +7,8 @@ const STATUSES = ['Contactado', 'Interesado', 'Presupuesto enviado', 'En seguimi
 const RESPONSIBLES = ['Alicia', 'Marta', 'Alejandro'];
 
 function ClientForm() {
+
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     const [form, setForm] = useState({
         date: '', name: '', contact: '', modality: '', status: '', responsible: '', source: '', amount: ''
@@ -19,7 +21,15 @@ function ClientForm() {
 
     //Se ejecuta al guardar
     const handleSubmit = async (e) => {
+
+        // Evita que el navegador recargue la página al enviar el formulario
         e.preventDefault();
+
+        if (!form.date || !form.name || !form.contact) {
+            setError('La fecha, el nombre y el contacto no pueden estar vacíos');
+            return
+        }
+
         await api.post('/clients', form);
         navigate('/clients');
     }
@@ -45,6 +55,7 @@ function ClientForm() {
                 </select>
                 <input name="source" placeholder="Origen" onChange={handleChange} className="border rounded px-3 py-2 text-sm" />
                 <input name="amount" type="number" placeholder="Importe" onChange={handleChange} className="border rounded px-3 py-2 text-sm" />
+                {error && <p className="text-red-500 text-sm">{error}</p>}
                 <button type="submit" className="bg-black text-white py-2 rounded text-sm font-medium hover:bg-gray-800">
                     Guardar
                 </button>
