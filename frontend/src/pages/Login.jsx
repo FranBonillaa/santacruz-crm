@@ -6,16 +6,23 @@ function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
+
+            if (!email || !password) {
+                setError('El email y la contraseña son obligatorios');
+                return
+            }
+
             const { data } = await api.post('/auth/login', { email, password })
             localStorage.setItem('token', data.token)
             navigate('/')
         } catch {
-            alert('Credenciales incorrectas')
+            setError('Credenciales incorrectas')
         }
     }
 
@@ -42,6 +49,7 @@ function Login() {
                             className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
                         />
                     </div>
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
                     <button
                         type="submit"
                         className="w-full bg-black text-white py-2 rounded text-sm font-medium hover:bg-gray-800"

@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 function Navbar() {
     const navigate = useNavigate();
@@ -10,7 +10,7 @@ function Navbar() {
 
     return (
         <nav className="bg-black text-white px-6 py-4 flex items-center justify-between">
-            <span className="font-bold text-lg tracking-widest">SANTACRUZ</span>
+            <Link className="font-bold text-lg tracking-widest">SANTACRUZ</Link>
             <div className="flex gap-6 text-sm">
                 <NavLink
                     to="/clients"
