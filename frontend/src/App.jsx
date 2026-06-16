@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route element={<Layout />}>
-          <Route path='/' element={<div>Dashboard</div>} />
+          <Route path='/' element={<PrivateRoute><div>Dashboard</div></PrivateRoute>} />
           <Route path='/clients' element={<PrivateRoute><Clients /></PrivateRoute>} />
           <Route path='/clients/new' element={<PrivateRoute><ClientForm /></PrivateRoute>} />
           <Route path='/collaborations' element={<PrivateRoute><Collaborations /></PrivateRoute>} />
