@@ -8,6 +8,10 @@ const cors = require('cors');
 //Importar rutas
 const authRoutes = require('./routes/auth');
 const clients = require('./routes/clients');
+const appointments = require('./routes/appointments');
+const services = require('./routes/services');
+const packages = require('./routes/packages');
+const payments = require('./routes/payments');
 const authMiddleware = require('./middleware/auth');
 
 //Creacion aplicación Express
@@ -29,10 +33,12 @@ app.get('/api/health', (req, res) => {
 //Rutas públicas
 app.use('/api/auth', authRoutes);
 
-//Rutas privadas
 app.use('/api/clients', authMiddleware, clients);
+app.use('/api/appointments', authMiddleware, appointments);
+app.use('/api/services', authMiddleware, services);
+app.use('/api/packages', authMiddleware, packages);
+app.use('/api/payments', authMiddleware, payments);
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-});
-
+    console.log(`Server running on port ${PORT}`);
+})

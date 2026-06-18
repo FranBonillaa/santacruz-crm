@@ -5,7 +5,6 @@
 -- ============================================================
 -- TABLES
 -- ============================================================
-
 -- Usuarios del sistema (la dueña y futuras empleadas con acceso al CRM)
 CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -17,7 +16,7 @@ CREATE TABLE users (
 );
 
 -- Clientas del centro con sus datos de contacto e historial
-CREATE TABLE clients (
+CREATE TABLE client (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name VARCHAR(100) NOT NULL,
   last_name VARCHAR(150),
@@ -29,16 +28,16 @@ CREATE TABLE clients (
 );
 
 -- Categorías de servicios (Manos y Pies, Depilación, Tratamientos...)
-CREATE TABLE categories (
+CREATE TABLE category (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   sort_order INT DEFAULT 0
 );
 
 -- Servicios del centro con precio y duración, agrupados por categoría
-CREATE TABLE services (
+CREATE TABLE service (
   id SERIAL PRIMARY KEY,
-  category_id INT REFERENCES categories(id) ON DELETE
+  category_id INT REFERENCES category(id) ON DELETE
   SET
     NULL,
     name VARCHAR(200) NOT NULL,
@@ -49,9 +48,9 @@ CREATE TABLE services (
 );
 
 -- Citas reservadas por las clientas (fecha, hora y estado)
-CREATE TABLE appointments (
+CREATE TABLE appointment (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  client_id UUID REFERENCES clients(id) ON DELETE
+  client_id UUID REFERENCES client(id) ON DELETE
   SET
     NULL,
     date DATE NOT NULL,
@@ -64,10 +63,10 @@ CREATE TABLE appointments (
 );
 
 -- Servicios realizados en cada cita (una cita puede tener varios servicios)
-CREATE TABLE appointment_services (
+CREATE TABLE appointment_service (
   id SERIAL PRIMARY KEY,
-  appointment_id UUID REFERENCES appointments(id) ON DELETE CASCADE,
-  service_id INT REFERENCES services(id) ON DELETE
+  appointment_id UUID REFERENCES appointment(id) ON DELETE CASCADE,
+  service_id INT REFERENCES service(id) ON DELETE
   SET
     NULL,
     applied_price NUMERIC(8, 2),
@@ -76,7 +75,7 @@ CREATE TABLE appointment_services (
 );
 
 -- Bonos disponibles para la venta (ej: Bono 10 sesiones presoterapia)
-CREATE TABLE packages (
+CREATE TABLE package (
   id SERIAL PRIMARY KEY,
   name VARCHAR(200) NOT NULL,
   description TEXT,
@@ -86,20 +85,20 @@ CREATE TABLE packages (
 );
 
 -- Servicios que incluye cada bono y cuántas sesiones de cada uno
-CREATE TABLE package_details (
+CREATE TABLE package_detail (
   id SERIAL PRIMARY KEY,
-  package_id INT REFERENCES packages(id) ON DELETE CASCADE,
-  service_id INT REFERENCES services(id) ON DELETE
+  package_id INT REFERENCES package(id) ON DELETE CASCADE,
+  service_id INT REFERENCES service(id) ON DELETE
   SET
     NULL,
     session_count INT NOT NULL DEFAULT 1
 );
 
 -- Bonos comprados por cada clienta con el seguimiento de sesiones usadas
-CREATE TABLE client_packages (
+CREATE TABLE client_package (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  client_id UUID REFERENCES clients(id) ON DELETE CASCADE,
-  package_id INT REFERENCES packages(id) ON DELETE
+  client_id UUID REFERENCES client(id) ON DELETE CASCADE,
+  package_id INT REFERENCES package(id) ON DELETE
   SET
     NULL,
     purchase_date DATE DEFAULT CURRENT_DATE,
@@ -110,28 +109,28 @@ CREATE TABLE client_packages (
 );
 
 -- Registro de cada sesión consumida de un bono (cuándo y en qué cita)
-CREATE TABLE client_package_usage (
+CREATE TABLE client_package_use (
   id SERIAL PRIMARY KEY,
-  client_package_id UUID REFERENCES client_packages(id) ON DELETE CASCADE,
-  appointment_id UUID REFERENCES appointments(id) ON DELETE
+  client_package_id UUID REFERENCES client_package(id) ON DELETE CASCADE,
+  appointment_id UUID REFERENCES appointment(id) ON DELETE
   SET
     NULL,
-    service_id INT REFERENCES services(id) ON DELETE
+    service_id INT REFERENCES service(id) ON DELETE
   SET
     NULL,
     used_date DATE DEFAULT CURRENT_DATE
 );
 
 -- Registro de cobros (por cita suelta o por compra de bono)
-CREATE TABLE payments (
+CREATE TABLE payment (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  client_id UUID REFERENCES clients(id) ON DELETE
+  client_id UUID REFERENCES client(id) ON DELETE
   SET
     NULL,
-    appointment_id UUID REFERENCES appointments(id) ON DELETE
+    appointment_id UUID REFERENCES appointment(id) ON DELETE
   SET
     NULL,
-    client_package_id UUID REFERENCES client_packages(id) ON DELETE
+    client_package_id UUID REFERENCES client_package(id) ON DELETE
   SET
     NULL,
     concept VARCHAR(200),
@@ -143,12 +142,12 @@ CREATE TABLE payments (
 );
 
 -- ============================================================
--- ADDITIONAL FOREIGN KEY (appointment_services -> client_packages)
+-- ADDITIONAL FOREIGN KEY (appointment_service -> client_package)
 -- ============================================================
 ALTER TABLE
-  appointment_services
+  appointment_service
 ADD
-  CONSTRAINT fk_client_package FOREIGN KEY (client_package_id) REFERENCES client_packages(id) ON DELETE
+  CONSTRAINT fk_client_package FOREIGN KEY (client_package_id) REFERENCES client_package(id) ON DELETE
 SET
   NULL;
 
@@ -156,7 +155,7 @@ SET
 -- DATA: CATEGORIES
 -- ============================================================
 INSERT INTO
-  categories (name, sort_order)
+  category (name, sort_order)
 VALUES
   ('Manos y Pies', 1),
   ('Depilación Facial y Corporal', 2),
@@ -169,7 +168,7 @@ VALUES
 -- DATA: SERVICES — Manos y Pies (category_id = 1)
 -- ============================================================
 INSERT INTO
-  services (category_id, name, price)
+  service (category_id, name, price)
 VALUES
   (1, 'Manicura', 10.00),
   (1, 'Esmaltado semipermanente', 16.00),
@@ -188,7 +187,7 @@ VALUES
 -- DATA: SERVICES — Depilación Facial y Corporal (category_id = 2)
 -- ============================================================
 INSERT INTO
-  services (category_id, name, price)
+  service (category_id, name, price)
 VALUES
   (2, 'Depilación cejas', 7.00),
   (2, 'Tinte de cejas', 5.00),
@@ -214,7 +213,7 @@ VALUES
 -- DATA: SERVICES — Tratamientos Faciales (category_id = 3)
 -- ============================================================
 INSERT INTO
-  services (category_id, name, price)
+  service (category_id, name, price)
 VALUES
   (3, 'Higiene facial', 49.99),
   (3, 'Collagen Booster', 90.00),
@@ -229,7 +228,7 @@ VALUES
 -- DATA: SERVICES — Tratamientos Corporales (category_id = 4)
 -- ============================================================
 INSERT INTO
-  services (category_id, name, price)
+  service (category_id, name, price)
 VALUES
   (4, 'Presoterapia', 10.00),
   (
@@ -244,7 +243,7 @@ VALUES
 -- DATA: SERVICES — Lifting de Pestañas (category_id = 5)
 -- ============================================================
 INSERT INTO
-  services (category_id, name, price)
+  service (category_id, name, price)
 VALUES
   (5, 'Lifting de pestañas', 40.00),
   (5, 'Lifting de pestañas (promoción)', 36.00);
@@ -253,7 +252,7 @@ VALUES
 -- DATA: PACKAGES
 -- ============================================================
 INSERT INTO
-  packages (name, description, price, total_sessions)
+  package (name, description, price, total_sessions)
 VALUES
   (
     'Bono Presoterapia 10+1',
@@ -302,118 +301,118 @@ VALUES
 -- DATA: PACKAGE DETAILS
 -- ============================================================
 INSERT INTO
-  package_details (package_id, service_id, session_count)
+  package_detail (package_id, service_id, session_count)
 SELECT
   p.id,
   s.id,
   11
 FROM
-  packages p,
-  services s
+  package p,
+  service s
 WHERE
   p.name = 'Bono Presoterapia 10+1'
   AND s.name = 'Presoterapia';
 
 INSERT INTO
-  package_details (package_id, service_id, session_count)
+  package_detail (package_id, service_id, session_count)
 SELECT
   p.id,
   s.id,
   6
 FROM
-  packages p,
-  services s
+  package p,
+  service s
 WHERE
   p.name = 'Bono Collagen Booster 6 sesiones'
   AND s.name = 'Collagen Booster';
 
 INSERT INTO
-  package_details (package_id, service_id, session_count)
+  package_detail (package_id, service_id, session_count)
 SELECT
   p.id,
   s.id,
   1
 FROM
-  packages p,
-  services s
+  package p,
+  service s
 WHERE
   p.name = 'Bono Glycolic + Hyaluronic 5 sesiones'
   AND s.name = 'Glycolic + Vitamina C';
 
 INSERT INTO
-  package_details (package_id, service_id, session_count)
+  package_detail (package_id, service_id, session_count)
 SELECT
   p.id,
   s.id,
   4
 FROM
-  packages p,
-  services s
+  package p,
+  service s
 WHERE
   p.name = 'Bono Glycolic + Hyaluronic 5 sesiones'
   AND s.name = 'Hyaluronic';
 
 INSERT INTO
-  package_details (package_id, service_id, session_count)
+  package_detail (package_id, service_id, session_count)
 SELECT
   p.id,
   s.id,
   1
 FROM
-  packages p,
-  services s
+  package p,
+  service s
 WHERE
   p.name = 'Bono Glycolic + Reparante 7 sesiones'
   AND s.name = 'Glycolic + Vitamina C';
 
 INSERT INTO
-  package_details (package_id, service_id, session_count)
+  package_detail (package_id, service_id, session_count)
 SELECT
   p.id,
   s.id,
   6
 FROM
-  packages p,
-  services s
+  package p,
+  service s
 WHERE
   p.name = 'Bono Glycolic + Reparante 7 sesiones'
   AND s.name = 'Bioceuticals - Tratamiento reparante';
 
 INSERT INTO
-  package_details (package_id, service_id, session_count)
+  package_detail (package_id, service_id, session_count)
 SELECT
   p.id,
   s.id,
   6
 FROM
-  packages p,
-  services s
+  package p,
+  service s
 WHERE
   p.name = 'Bono Despigmentante 6 sesiones'
   AND s.name = 'Tratamiento despigmentante';
 
 INSERT INTO
-  package_details (package_id, service_id, session_count)
+  package_detail (package_id, service_id, session_count)
 SELECT
   p.id,
   s.id,
   6
 FROM
-  packages p,
-  services s
+  package p,
+  service s
 WHERE
   p.name = 'Bono Pieles Grasas 6 sesiones'
   AND s.name = 'Tratamiento pieles grasas';
 
 INSERT INTO
-  package_details (package_id, service_id, session_count)
+  package_detail (package_id, service_id, session_count)
 SELECT
   p.id,
   s.id,
   6
 FROM
-  packages p,
-  services s
+  package p,
+  service s
 WHERE
   p.name = 'Bono Probióticos 6 sesiones'
   AND s.name = 'Lab Biotics - Probiotics';
@@ -421,5 +420,5 @@ WHERE
 -- ============================================================
 -- NOTE: price for 'Depilación perianal' is NULL
 -- Update when confirmed:
--- UPDATE services SET price = XX.00 WHERE name = 'Depilación perianal';
+-- UPDATE service SET price = XX.00 WHERE name = 'Depilación perianal';
 -- ============================================================

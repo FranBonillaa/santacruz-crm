@@ -12,14 +12,14 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    const { rows } = await db.query('SELECT * FROM "user" WHERE email = $1', [email]);
+    const { rows } = await db.query('SELECT * FROM users WHERE email = $1', [email]);
 
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Credenciales incorrectas' });
     }
 
     const user = rows[0];
-    const valid = await bcrypt.compare(password, user.password);
+    const valid = await bcrypt.compare(password, user.password_hash);
 
     if (!valid) {
       return res.status(401).json({ error: 'Credenciales incorrectas' });
