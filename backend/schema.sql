@@ -44,6 +44,7 @@ CREATE TABLE service (
     description TEXT,
     price NUMERIC(8, 2),
     duration_min INT,
+    image_url TEXT,
     is_active BOOLEAN DEFAULT TRUE
 );
 
