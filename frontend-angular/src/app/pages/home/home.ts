@@ -3,10 +3,17 @@ import { NavbarComponent } from '../../components/navbar/navbar';
 import { HeroComponent } from '../../components/hero/hero';
 import { ServicesComponent } from '../../components/services/services';
 import { FeaturesComponent } from '../../components/features/features';
+import { PackagesComponent } from '../../components/packages/packages';
 
 @Component({
   selector: 'app-home',
-  imports: [NavbarComponent, HeroComponent, ServicesComponent, FeaturesComponent],
+  imports: [
+    NavbarComponent,
+    HeroComponent,
+    ServicesComponent,
+    FeaturesComponent,
+    PackagesComponent,
+  ],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
