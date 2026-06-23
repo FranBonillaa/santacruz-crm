@@ -69,25 +69,25 @@
             </div>
 
             <div><!-- derecha: formulario -->
-                <form class="bg-white p-8 flex flex-col gap-4">
+                <div class="bg-white p-8 flex flex-col gap-4">
                     <h3 class="text-xl font-bold text-[#2C2C2C] mb-2">Solicitar cita</h3>
                     <span class="text-[#B8965A] text-xs tracking-widest">NOMBRE COMPLETO</span>
-                    <input type="text" placeholder="Tu nombre"
+                    <input type="text" placeholder="Tu nombre" [(ngModel)]="nombre"
                         class="bg-[#F7F2EA] p-3 text-sm outline-none w-full text-[#2C2C2C] placeholder-[#9B9B9B]">
                     <span class="text-[#B8965A] text-xs tracking-widest">TELÉFONO O EMAIL</span>
-                    <input type="text" placeholder="Para contactarte"
+                    <input type="text" placeholder="Para contactarte" [(ngModel)]="contacto"
                         class="bg-[#F7F2EA] p-3 text-sm outline-none w-full text-[#2C2C2C] placeholder-[#9B9B9B]">
                     <span class="text-[#B8965A] text-xs tracking-widest">SERVICIO DE INTERÉS</span>
-                    <select class="bg-[#F7F2EA] p-3 text-sm outline-none w-full text-[#2C2C2C]">
+                    <select [(ngModel)]="servicio" class="bg-[#F7F2EA] p-3 text-sm outline-none w-full text-[#2C2C2C]">
                         <option>Selecciona un servicio...</option>
                     </select>
                     <span class="text-[#B8965A] text-xs tracking-widest">MENSAJE (OPCIONAL)</span>
-                    <textarea placeholder="Cuéntanos qué necesitas..."
+                    <textarea placeholder="Cuéntanos qué necesitas..." [(ngModel)]="mensaje"
                         class="bg-[#F7F2EA] p-3 text-sm outline-none w-full text-[#2C2C2C] placeholder-[#9B9B9B]"></textarea>
-                    <button type="submit"
+                    <button type="button" (click)="enviarWhatsApp()"
                         class="bg-[#B8965A] text-white text-xs tracking-widest font-semibold py-3 w-full hover:bg-[#a07d4a] transition-colors">ENVIAR
                         SOLICITUD</button>
-                </form>
+                </div>
             </div>
         </div>
 
