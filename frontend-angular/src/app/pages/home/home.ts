@@ -5,6 +5,7 @@ import { ServicesComponent } from '../../components/services/services';
 import { FeaturesComponent } from '../../components/features/features';
 import { PackagesComponent } from '../../components/packages/packages';
 import { ContactComponent } from '../../components/contact/contact';
+import { FooterComponent } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import { ContactComponent } from '../../components/contact/contact';
     FeaturesComponent,
     PackagesComponent,
     ContactComponent,
+    FooterComponent,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',
