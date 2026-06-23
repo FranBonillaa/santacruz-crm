@@ -14,6 +14,7 @@ export class ServicesComponent {
     'Tratamientos Faciales',
     'Tratamientos Corporales',
     'Lifting de Pestañas',
+    'Tratamientos INDIBA',
   ];
 
   activeCategory = 'Manos y Pies';
@@ -274,6 +275,39 @@ export class ServicesComponent {
       category: 'Lifting de Pestañas',
       name: 'Lifting de pestañas (promoción)',
       price: 36,
+      image: this.PLACEHOLDER,
+    },
+    // Tratamientos INDIBA
+    { category: 'Tratamientos INDIBA', name: 'INDIBA Facial', price: 80, image: this.PLACEHOLDER },
+    { category: 'Tratamientos INDIBA', name: 'INDIBA Piernas', price: 80, image: this.PLACEHOLDER },
+    {
+      category: 'Tratamientos INDIBA',
+      name: 'INDIBA Cartucheras (40 min)',
+      price: 60,
+      image: this.PLACEHOLDER,
+    },
+    {
+      category: 'Tratamientos INDIBA',
+      name: 'INDIBA Abdomen (40 min)',
+      price: 60,
+      image: this.PLACEHOLDER,
+    },
+    {
+      category: 'Tratamientos INDIBA',
+      name: 'INDIBA Pecho (40 min)',
+      price: 60,
+      image: this.PLACEHOLDER,
+    },
+    {
+      category: 'Tratamientos INDIBA',
+      name: 'INDIBA Glúteos (40 min)',
+      price: 60,
+      image: this.PLACEHOLDER,
+    },
+    {
+      category: 'Tratamientos INDIBA',
+      name: 'INDIBA Brazos (40 min)',
+      price: 60,
       image: this.PLACEHOLDER,
     },
   ];
