@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,4 +6,25 @@ import { Component } from '@angular/core';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
-export class NavbarComponent {}
+export class NavbarComponent implements AfterViewInit {
+  activeSection = 'inicio';
+
+  ngAfterViewInit(): void {
+    const sections = ['inicio', 'servicios', 'bonos', 'contacto'];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.activeSection = entry.target.id;
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  }
+}
