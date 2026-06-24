@@ -37,4 +37,18 @@ export class ContactComponent implements AfterViewInit {
       },
     });
   }
+
+  dropdownAbierto = false;
+  servicioSeleccionado = 'Selecciona un servicio';
+
+  // Interruptor
+  toggleDropdown() {
+    this.dropdownAbierto = !this.dropdownAbierto;
+  }
+
+  seleccionarServicio(nombre: string) {
+    this.servicioSeleccionado = nombre;
+    this.servicio = nombre;
+    this.dropdownAbierto = false;
+  }
 }

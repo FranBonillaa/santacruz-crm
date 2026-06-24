@@ -79,12 +79,25 @@
                     <input type="text" placeholder="Para contactarte" [(ngModel)]="contacto"
                         class="bg-[#F7F2EA] p-3 text-sm outline-none w-full text-[#2C2C2C] placeholder-[#9B9B9B]">
                     <span class="text-[#B8965A] text-xs tracking-widest">SERVICIO DE INTERÉS</span>
-                    <select [(ngModel)]="servicio" class="bg-[#F7F2EA] p-3 text-sm outline-none w-full text-[#2C2C2C]">
-                        <option value="">Selecciona un servicio...</option>
-                        @for (s of services; track s.name){
-                        <option [value]="s.name">{{s.name}}</option>
+                    <!-- Dropdown custom para seleccionar servicio -->
+                    <div class="relative">
+                        <button type="button" (click)="toggleDropdown()"
+                            class="w-full bg-[#F7F2EA] border border-[#E0D5C5] px-4 py-3 text-left text-sm font-sans text-[#6B6B6B] flex justify-between items-center">
+                            {{ servicioSeleccionado }}
+                            <span class="text-[#B8965A]">▾</span>
+                        </button>
+                        @if (dropdownAbierto) {
+                        <div
+                            class="absolute z-50 w-full bg-white border border-[#E0D5C5] max-h-60 overflow-y-auto shadow-lg">
+                            @for (s of services; track s.name) {
+                            <button type="button" (click)="seleccionarServicio(s.name)"
+                                class="w-full text-left px-4 py-2 text-sm font-sans text-[#2C2C2C] hover:bg-[#F7F2EA] hover:text-[#B8965A]">
+                                {{ s.name }}
+                            </button>
+                            }
+                        </div>
                         }
-                    </select>
+                    </div>
                     <span class="text-[#B8965A] text-xs tracking-widest">MENSAJE (OPCIONAL)</span>
                     <textarea placeholder="Cuéntanos qué necesitas..." [(ngModel)]="mensaje"
                         class="bg-[#F7F2EA] p-3 text-sm outline-none w-full text-[#2C2C2C] placeholder-[#9B9B9B]"></textarea>
