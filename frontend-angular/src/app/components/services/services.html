@@ -4,28 +4,30 @@
         <!-- Cabecera -->
         <div class="text-center mb-12">
             <span class="text-[#B8965A] text-xs tracking-widest font-sans">LO QUE OFRECEMOS</span>
-            <h2 class="text-5xl font-bold text-[#2C2C2C] mt-3 font-serif">Nuestros Servicios</h2>
+            <h2 class="text-3xl md:text-5xl font-bold text-[#2C2C2C] mt-3 font-serif">Nuestros Servicios</h2>
         </div>
         <div class="flex gap-3 mb-10 overflow-x-auto pb-2 font-sans">
             <!-- @for recorre el array categories del .ts, cat es cada elemento -->
             <!-- track cat: identifica cada botón por su texto para no repintarlos todos -->
             @for (cat of categories; track cat) {
             <!-- [class] aplica estilo dorado si es la categoría activa, si no solo borde -->
-            <button (click)="setCategory(cat)" [class]="activeCategory === cat
-    ? 'bg-[#B8965A] text-white px-6 py-2 text-xs tracking-widest font-semibold whitespace-nowrap'
-    : 'border border-[#2C2C2C] text-[#2C2C2C] px-6 py-2 text-xs tracking-widest font-semibold whitespace-nowrap'">
+            <button (click)="setCategory(cat)"
+                [class]="activeCategory === cat
+                ? 'bg-[#B8965A] text-white px-3 md:px-6 py-2 text-[10px] md:text-xs tracking-widest font-semibold whitespace-nowrap'
+                : 'border border-[#2C2C2C] text-[#2C2C2C] px-3 md:px-6 py-2 text-[10px] md:text-xs tracking-widest font-semibold whitespace-nowrap'">
                 {{ cat | uppercase }}
             </button>
             }
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class=" grid grid-cols-2 lg:grid-cols-3 gap-6">
             @for (service of filteredServices; track service.name){
             <div
-                class="service-card bg-white p-6 flex flex-col items-center hover:shadow-lg transition-shadow rounded-3xl">
-                <img [src]="service.image" alt="{{service.name}}" class="w-full h-40 object-cover">
+                class="service-card bg-white p-3 md:p-6 flex flex-col items-center hover:shadow-lg transition-shadow rounded-3xl">
+                <img [src]="service.image" alt="{{service.name}}" class="w-full h-28 md:h-40 object-cover">
                 <div class="p-2 flex flex-col gap-2 items-center rounded-full">
                     <span class="text-[#2C2C2C] font-semibold text-sm font-sans">{{ service.name }}</span>
-                    <span class="text-[#B8965A] font-bold text-lg font-sans">{{ service.price ? service.price + ' €' :
+                    <span class="text-[#B8965A] font-bold text-lg font-sans">{{ service.price ? service.price + ' €'
+                        :
                         'Consultar'
                         }}</span>
                 </div>
