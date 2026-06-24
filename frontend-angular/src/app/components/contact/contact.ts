@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ServicesData } from '../../services/services-data';
 
 @Component({
   selector: 'app-contact',
@@ -8,6 +9,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './contact.css',
 })
 export class ContactComponent {
+  private dataSvc = inject(ServicesData);
+  services = this.dataSvc.services;
+
   nombre = '';
   contacto = '';
   servicio = '';

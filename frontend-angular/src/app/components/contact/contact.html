@@ -79,7 +79,10 @@
                         class="bg-[#F7F2EA] p-3 text-sm outline-none w-full text-[#2C2C2C] placeholder-[#9B9B9B]">
                     <span class="text-[#B8965A] text-xs tracking-widest">SERVICIO DE INTERÉS</span>
                     <select [(ngModel)]="servicio" class="bg-[#F7F2EA] p-3 text-sm outline-none w-full text-[#2C2C2C]">
-                        <option>Selecciona un servicio...</option>
+                        <option value="">Selecciona un servicio...</option>
+                        @for (s of services; track s.name){
+                        <option [value]="s.name">{{s.name}}</option>
+                        }
                     </select>
                     <span class="text-[#B8965A] text-xs tracking-widest">MENSAJE (OPCIONAL)</span>
                     <textarea placeholder="Cuéntanos qué necesitas..." [(ngModel)]="mensaje"
