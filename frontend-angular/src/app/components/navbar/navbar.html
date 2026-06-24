@@ -8,7 +8,7 @@
                 </div>
         </div>
 
-        <ul class="flex gap-10 m-0 p-0">
+        <ul class="hidden md:flex gap-10 m-0 p-0">
                 <li><a href="#inicio" [class.text-\[#B8965A\]]="activeSection === 'inicio'"
                                 class="text-[#2C2C2C] text-xs tracking-widest font-medium hover:text-[#B8965A] font-sans">INICIO</a>
                 </li>
@@ -24,5 +24,21 @@
         </ul>
 
         <a href="#contacto"
-                class="bg-[#B8965A] text-white px-6 py-2 text-xs font-semibold tracking-widest hover:bg-[#a07d4a] transition-colors rounded-md font-sans">RESERVAR</a>
+                class="bg-[#B8965A] hidden md:block  text-white px-6 py-2 text-xs font-semibold tracking-widest hover:bg-[#a07d4a] transition-colors rounded-md font-sans">RESERVAR</a>
+        <button (click)="toggleMenu()" class="md:hidden text-[#2C2C2C] text-2xl">☰</button>
+
 </nav>
+
+@if (menuAbierto) {
+<div
+        class="md:hidden bg-[#F7F2EA] border-t border-[#e8e0d4] px-8 py-6 flex flex-col gap-6 fixed top-[72px] left-0 w-full z-50">
+        <a href="#inicio" (click)="toggleMenu()"
+                class="text-[#2C2C2C] text-xs tracking-widest font-medium hover:text-[#B8965A] font-sans">INICIO</a>
+        <a href="#servicios" (click)="toggleMenu()"
+                class="text-[#2C2C2C] text-xs tracking-widest font-medium hover:text-[#B8965A] font-sans">SERVICIOS</a>
+        <a href="#bonos" (click)="toggleMenu()"
+                class="text-[#2C2C2C] text-xs tracking-widest font-medium hover:text-[#B8965A] font-sans">BONOS</a>
+        <a href="#contacto" (click)="toggleMenu()"
+                class="text-[#2C2C2C] text-xs tracking-widest font-medium hover:text-[#B8965A] font-sans">CONTACTO</a>
+</div>
+}

@@ -27,4 +27,11 @@ export class NavbarComponent implements AfterViewInit {
       if (el) observer.observe(el);
     });
   }
+
+  menuAbierto = false;
+
+  // Interruptor de apagado y encendido
+  toggleMenu() {
+    this.menuAbierto = !this.menuAbierto;
+  }
 }
