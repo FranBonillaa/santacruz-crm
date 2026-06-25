@@ -24,4 +24,9 @@ export class PackagesComponent implements AfterViewInit {
       },
     });
   }
+
+  solicitarBono(nombre: string, precio: string) {
+    const texto = `Hola, me interesa el ${nombre} (${precio}). ¿Podríais informarme?`;
+    window.open(`https://wa.me/34622699116?text=${encodeURIComponent(texto)}`, '_blank');
+  }
 }
