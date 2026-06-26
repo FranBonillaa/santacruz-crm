@@ -7,6 +7,7 @@ import { PackagesComponent } from '../../components/packages/packages';
 import { ContactComponent } from '../../components/contact/contact';
 import { FooterComponent } from '../../components/footer/footer';
 import { ReviewsComponent } from '../../components/reviews/reviews';
+import { AboutComponent } from '../../components/about/about';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ import { ReviewsComponent } from '../../components/reviews/reviews';
     ContactComponent,
     FooterComponent,
     ReviewsComponent,
+    AboutComponent,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',
