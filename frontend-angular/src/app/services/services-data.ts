@@ -196,7 +196,12 @@ export class ServicesData {
       price: 90,
       image: '/images/collagen_booster.jpg',
     },
-    { category: 'Tratamientos Faciales', name: 'Hyaluronic', price: 60, image: '/images/hyaluronic.jpg' },
+    {
+      category: 'Tratamientos Faciales',
+      name: 'Hyaluronic',
+      price: 60,
+      image: '/images/hyaluronic.jpg',
+    },
     {
       category: 'Tratamientos Faciales',
       name: 'Glycolic + Vitamina C',
@@ -268,8 +273,18 @@ export class ServicesData {
       image: '/images/lifting_pestanas.jpg',
     },
     // Tratamientos INDIBA
-    { category: 'Tratamientos INDIBA', name: 'INDIBA Facial', price: 80, image: '/images/indiba_facial.jpg' },
-    { category: 'Tratamientos INDIBA', name: 'INDIBA Piernas', price: 80, image: '/images/indiba_corporal.jpg' },
+    {
+      category: 'Tratamientos INDIBA',
+      name: 'INDIBA Facial',
+      price: 80,
+      image: '/images/indiba_facial.jpg',
+    },
+    {
+      category: 'Tratamientos INDIBA',
+      name: 'INDIBA Piernas',
+      price: 80,
+      image: '/images/indiba_cartucheras.jpg',
+    },
     {
       category: 'Tratamientos INDIBA',
       name: 'INDIBA Cartucheras (40 min)',
