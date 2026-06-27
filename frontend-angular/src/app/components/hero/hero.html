@@ -1,42 +1,43 @@
-<section id="inicio" class="relative h-screen flex overflow-hidden">
+<section id="inicio" class="relative h-screen flex gap-0 overflow-hidden bg-black">
 
     <!-- Imagen principal izquierda -->
-    <div class="relative w-full md:w-2/3 h-full flex-shrink-0">
+    <div class="relative w-full md:w-2/3 h-full">
         <!-- Móvil: solo esta imagen, sin panel derecho -->
-        <img src="/images/hero_movil_750x1334.jpeg" alt="María Fornet Estética"
-            class="w-full h-full object-cover object-center md:hidden">
+        <img src="/images/hero_movil_750x1334.jpeg" class="w-full h-full object-cover object-center md:hidden">
         <!-- Web: imagen izquierda, acompañada con el panel derecho -->
         <img src="/images/hero_1920x1080.jpeg" alt="María Fornet Estética"
             class="w-full h-full object-cover object-left hidden md:block">
         <div class="absolute inset-0 bg-black/50"></div>
 
         <!-- Contenido texto -->
-        <div class="hero-content absolute inset-0 z-10 flex flex-col justify-start md:justify-center h-full px-8 md:px-24 max-w-full w-full pt-28 md:pt-0">
+        <div
+            class="hero-content absolute inset-0 z-10 flex flex-col justify-start md:justify-center h-full px-8 md:px-24 max-w-full w-full pt-28 md:pt-0">
             <span class="w-8 h-0.5 bg-[#B8965A] mb-3 block"></span>
             <span class="text-[#B8965A] text-xs tracking-widest mb-4 block font-sans">ESTÉTICA Y BIENESTAR</span>
             <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-2 font-serif">Cuida tu piel,</h1>
-            <h2 class="text-4xl md:text-6xl font-bold text-[#B8965A] italic leading-tight mb-8 font-serif">cuídate tú.</h2>
+            <h2 class="text-4xl md:text-6xl font-bold text-[#B8965A] italic leading-tight mb-8 font-serif">cuídate tú.
+            </h2>
             <p class="text-white/80 text-sm md:text-base mb-10 max-w-md leading-relaxed font-sans">
-                En María Fornet Centro de Estética te ofrecemos tratamientos personalizados para que te sientas bien contigo mismo. Tu bienestar es nuestra prioridad.</p>
+                En María Fornet Centro de Estética te ofrecemos tratamientos personalizados para que te sientas bien
+                contigo mismo. Tu bienestar es nuestra prioridad.</p>
             <div class="flex gap-4 font-sans">
                 <a href="#servicios"
-                    class="bg-[#B8965A] text-white px-4 md:px-8 py-3 text-xs rounded-full font-semibold tracking-widest hover:bg-[#a07d4a] transition-colors">VER SERVICIOS</a>
+                    class="bg-[#B8965A] text-white px-4 md:px-8 py-3 text-xs rounded-full font-semibold tracking-widest hover:bg-[#a07d4a] transition-colors">VER
+                    SERVICIOS</a>
                 <a href="#contacto"
                     class="border border-white text-white px-4 md:px-8 py-3 text-xs rounded-full font-semibold tracking-widest hover:bg-white hover:text-[#2C2C2C] transition-colors">CONTACTAR</a>
             </div>
         </div>
-
     </div>
 
     <!-- Imagen derecha (solo desktop) -->
-    <div class="hidden md:block relative w-1/3 h-full flex-shrink-0 overflow-hidden">
-        <img src="/images/IMG_2460.jpg" alt="Presoterapia"
-            class="w-full h-full object-cover object-top">
-        <div class="absolute inset-0 bg-black/20"></div>
+    <div class="relative hidden md:block w-1/3 h-full">
+        <img src="/images/IMG_2460.jpg" alt="Presoterapia" class="w-full h-full object-cover object-top">
+        <div class="absolute inset-0"></div>
     </div>
-
     <!-- Explorar -->
-    <div class="absolute bottom-8 inset-x-0 flex flex-col items-center gap-2 text-white/60 cursor-pointer z-10">
+    <div
+        class="absolute bottom-8 inset-x-0 flex justify-center flex-col items-center gap-2 text-white/60 cursor-pointer z-10">
         <span class="text-xs tracking-widest font-sans">EXPLORAR</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
