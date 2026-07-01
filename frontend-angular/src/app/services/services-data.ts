@@ -26,7 +26,7 @@ export class ServicesData {
       category: 'Manos y Pies',
       name: 'Retirada semipermanente',
       price: 10,
-      image: '/images/manicura.jpg',
+      image: '/images/retirada_semipermanente.jpg',
     },
     { category: 'Manos y Pies', name: 'Pedicura', price: 25, image: '/images/pedicura.jpg' },
     {
@@ -65,7 +65,7 @@ export class ServicesData {
       price: 25,
       image: '/images/unas_acrilicas.jpg',
     },
-    { category: 'Manos y Pies', name: 'Arreglo uña rota', price: 3, image: '/images/manicura.jpg' },
+    { category: 'Manos y Pies', name: 'Arreglo uña rota', price: 3, image: '/images/arreglo_una_rota.jpg' },
 
     // Depilación Facial y Corporal
     {
