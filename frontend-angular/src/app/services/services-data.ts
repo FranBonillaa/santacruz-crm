@@ -256,7 +256,7 @@ export class ServicesData {
       category: 'Tratamientos Corporales',
       name: 'Masaje relajante 30 min',
       price: 22,
-      image: '/images/masaje_relajante.jpg',
+      image: '/images/masaje_relajante_30.jpg',
     },
 
     // Lifting de Pestañas
